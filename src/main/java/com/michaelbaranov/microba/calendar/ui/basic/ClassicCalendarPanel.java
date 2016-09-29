@@ -56,6 +56,8 @@ class ClassicCalendarPanel extends JPanel implements
 
 	private JButton fastNextButton;
 
+	private static final int JAVA_MAJOR_VERSION = Integer.parseInt(System.getProperty("java.version").split("\\.|_|-b")[1]);
+
 	public ClassicCalendarPanel(Date aDate, Locale aLocale, TimeZone zone) {
 		this.locale = aLocale;
 		this.zone = zone;
@@ -159,7 +161,7 @@ class ClassicCalendarPanel extends JPanel implements
 		} else
 			calendar = Calendar.getInstance(zone, locale);
 
-		format = new SimpleDateFormat("MMMMM yyyy", locale);
+		format = new SimpleDateFormat(JAVA_MAJOR_VERSION >= 8 ? "LLLL yyyy" : "MMMMM yyyy", locale);
 		format.setTimeZone(zone);
 
 		setPreferredLabelSize();
