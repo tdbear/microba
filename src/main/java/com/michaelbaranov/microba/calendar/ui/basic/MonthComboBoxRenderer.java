@@ -17,10 +17,12 @@ class MonthComboBoxRenderer extends DefaultListCellRenderer {
 
 	private SimpleDateFormat dateFormat;
 
+	private static final int JAVA_MAJOR_VERSION = Integer.parseInt(System.getProperty("java.version").split("\\.|_|-b")[1]);
+
 	public MonthComboBoxRenderer(Locale locale, TimeZone zone) {
 		// this.locale = locale;
 		this.zone = zone;
-		dateFormat = new SimpleDateFormat("MMMM", locale);
+		dateFormat = new SimpleDateFormat(JAVA_MAJOR_VERSION >= 8 ? "LLLL" : "MMMM", locale);
 		dateFormat.setTimeZone(zone);
 	}
 
@@ -37,7 +39,7 @@ class MonthComboBoxRenderer extends DefaultListCellRenderer {
 
 	public void setLocale(Locale locale) {
 		// this.locale = locale;
-		dateFormat = new SimpleDateFormat("MMMM", locale);
+		dateFormat = new SimpleDateFormat(JAVA_MAJOR_VERSION >= 8 ? "LLLL" : "MMMM", locale);
 		dateFormat.setTimeZone(zone);
 	}
 
